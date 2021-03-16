@@ -17,7 +17,13 @@ export const contactSlice = createSlice({
       state.contacts = [...action.payload];
     },
     updateContact: (state, action) => {
-      
+      if (action.payload.index !== undefined) {
+        const newContacts = [...state.contacts];
+        newContacts[action.payload.index] = {...action.payload};
+        state.contacts = newContacts;
+      } else {
+        state.contacts = [...state.contacts, {...action.payload}];
+      }
     },
   },
 });

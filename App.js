@@ -8,12 +8,14 @@ import Store from './src/Redux/Store';
 
 export default function App() {
   return (
-    <Provider store={Store}>
-      <NavigationContainer>
-        <SafeAreaProvider>
-          <AppStack />
-        </SafeAreaProvider>
-      </NavigationContainer>
-    </Provider>
+    <>
+      <Provider store={Store}>
+        <NavigationContainer>
+          <SafeAreaProvider>
+            <AppStack />
+          </SafeAreaProvider>
+        </NavigationContainer>
+      </Provider>
+    </>
   );
 }

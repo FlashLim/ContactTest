@@ -15,8 +15,18 @@ export default function AppStack() {
       screenOptions={{
         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
       }}>
-      <Stack.Screen name="Contact" component={Contact} />
-      <Stack.Screen name="ContactDetail" component={ContactDetail} />
+      <Stack.Screen
+        name="Contact"
+        component={Contact}
+        options={{headerTitle: ''}}
+      />
+      <Stack.Screen
+        name="ContactDetail"
+        component={ContactDetail}
+        options={{
+          headerTitle: '',
+        }}
+      />
     </Stack.Navigator>
   );
 }

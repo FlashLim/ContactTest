@@ -9,9 +9,11 @@ function ContactFlatListItem(props) {
 
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate('ContactDetail', {...item})}>
+      onPress={() =>
+        navigation.navigate('ContactDetail', {...item, index: props.index})
+      }>
       <View style={styles.container}>
-        <Avatar />
+        <Avatar styles={{ marginRight: 10 }} />
         <Text style={styles.text}>{`${item.firstName} ${item.lastName}`}</Text>
       </View>
     </TouchableOpacity>
