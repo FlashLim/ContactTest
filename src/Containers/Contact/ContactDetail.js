@@ -1,7 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {
   Keyboard,
-  KeyboardAvoidingView,
   Platform,
   StyleSheet,
   Text,
@@ -16,6 +15,7 @@ import Separator from '../../Components/Separator';
 import {useNavigation} from '@react-navigation/native';
 import {useDispatch} from 'react-redux';
 import {updateContact} from './ContactSlice';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 const ContactDetail = props => {
   const item = props?.route?.params;
@@ -26,6 +26,7 @@ const ContactDetail = props => {
   const lastNameRef = useRef(null);
   const emailRef = useRef(null);
   const phoneRef = useRef(null);
+  const avoidViewRef = useRef(null);
 
   const [contactState, setContactState] = useState({
     email: null,
@@ -98,63 +99,59 @@ const ContactDetail = props => {
   }
 
   return (
-    <KeyboardAvoidingView
-      style={{flex: 1}}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+    <KeyboardAwareScrollView>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={{flex: 1}}>
+        <View>
           <Avatar styles={styles.avatar} />
-          <View style={{ flex: 1}}>
-            {renderHeader('Main Information')}
-            <View style={styles.textInputContainer}>
-              <ContactTextInput
-                ref={firstNameRef}
-                title={'First Name'}
-                value={contactState.firstName}
-                onChangeText={text =>
-                  setContactState(state => ({...state, firstName: text}))
-                }
-                onSubmitEditing={() => lastNameRef.current.focus()}
-                returnKeyType={'next'}
-              />
-              <Separator />
-              <ContactTextInput
-                ref={lastNameRef}
-                title={'Last Name'}
-                value={contactState.lastName}
-                onChangeText={text =>
-                  setContactState(state => ({...state, lastName: text}))
-                }
-                onSubmitEditing={() => emailRef?.current?.focus()}
-                returnKeyType={'next'}
-              />
-            </View>
-            {renderHeader('Sub Information')}
-            <View style={styles.textInputContainer}>
-              <ContactTextInput
-                ref={emailRef}
-                title={'Email'}
-                value={contactState.email}
-                onChangeText={text =>
-                  setContactState(state => ({...state, email: text}))
-                }
-                onSubmitEditing={() => phoneRef?.current?.focus()}
-                returnKeyType={'next'}
-              />
-              <Separator />
-              <ContactTextInput
-                ref={phoneRef}
-                title={'Phone'}
-                value={contactState.phone}
-                onChangeText={text =>
-                  setContactState(state => ({...state, phone: text}))
-                }
-              />
-            </View>
+          {renderHeader('Main Information')}
+          <View style={styles.textInputContainer}>
+            <ContactTextInput
+              ref={firstNameRef}
+              title={'First Name'}
+              value={contactState.firstName}
+              onChangeText={text =>
+                setContactState(state => ({...state, firstName: text}))
+              }
+              onSubmitEditing={() => lastNameRef.current.focus()}
+              returnKeyType={'next'}
+            />
+            <Separator />
+            <ContactTextInput
+              ref={lastNameRef}
+              title={'Last Name'}
+              value={contactState.lastName}
+              onChangeText={text =>
+                setContactState(state => ({...state, lastName: text}))
+              }
+              onSubmitEditing={() => emailRef?.current?.focus()}
+              returnKeyType={'next'}
+            />
+          </View>
+          {renderHeader('Sub Information')}
+          <View style={styles.textInputContainer}>
+            <ContactTextInput
+              ref={emailRef}
+              title={'Email'}
+              value={contactState.email}
+              onChangeText={text =>
+                setContactState(state => ({...state, email: text}))
+              }
+              onSubmitEditing={() => phoneRef?.current?.focus()}
+              returnKeyType={'next'}
+            />
+            <Separator />
+            <ContactTextInput
+              ref={phoneRef}
+              title={'Phone'}
+              value={contactState.phone}
+              onChangeText={text =>
+                setContactState(state => ({...state, phone: text}))
+              }
+            />
           </View>
         </View>
       </TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
+    </KeyboardAwareScrollView>
   );
 };
 
@@ -178,5 +175,6 @@ const styles = StyleSheet.create({
   },
   textInputContainer: {
     paddingHorizontal: 10,
+    flex: 1,
   },
 });
