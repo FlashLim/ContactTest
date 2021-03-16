@@ -4,18 +4,18 @@ import {
 } from '@react-navigation/stack';
 import React from 'react';
 import ContactDetail from '../Containers/Contact/ContactDetail';
-import ContactList from '../Containers/Contact/ContactList';
+import Contact from '../Containers/Contact/Contact';
 
 const Stack = createStackNavigator();
 
 export default function AppStack() {
   return (
     <Stack.Navigator
-      initialRouteName="ContactList"
+      initialRouteName="Contact"
       screenOptions={{
         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
       }}>
-      <Stack.Screen name="ContactList" component={ContactList} />
+      <Stack.Screen name="Contact" component={Contact} />
       <Stack.Screen name="ContactDetail" component={ContactDetail} />
     </Stack.Navigator>
   );

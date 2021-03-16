@@ -13,7 +13,7 @@ export const contactSlice = createSlice({
       // immutable state based off those changes
       state.contacts = [...action.payload];
     },
-    refreshContacts: state => {
+    refreshContacts: (state, action) => {
       state.contacts = [...action.payload];
     },
     updateContact: (state, action) => {
